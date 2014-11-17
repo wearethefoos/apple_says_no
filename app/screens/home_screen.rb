@@ -28,13 +28,14 @@ class HomeScreen < PM::Screen
   end
 
   def random_no
-    @noes ||= Dir.glob("#{BASE_AUDIO_PATH}/no*.wav")
+    @noes ||= Dir.glob("#{BASE_AUDIO_PATH}no*.wav")
     @noes.sample
   end
 
   def play(file_name)
     path = file_name if file_name.match(/^#{BASE_AUDIO_PATH}/)
     path ||= "#{BASE_AUDIO_PATH}#{file_name}"
+    p path
     sound_id = find_or_create_sound_id(path)
     AudioServicesPlaySystemSound(sound_id[0])
   end
